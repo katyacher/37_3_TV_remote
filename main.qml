@@ -8,7 +8,7 @@ Window {
     width: 240
     height: 680
     visible: true
-    title: qsTr("Hello World")
+    title: qsTr("TV remote")
     color:"#000000"
 
     GridLayout{
@@ -17,10 +17,6 @@ Window {
         columns:3
         columnSpacing: 30
         rowSpacing: 30
-
-
-
-       // Layout.fillWidth: true
 
         ButtonGroup {
             id: btnGroup
@@ -33,7 +29,7 @@ Window {
             Layout.leftMargin: 30
            ButtonGroup.group: btnGroup
            text: "0"
-           onClicked: {current_channel.text = "Channel: 0";}
+           onClicked: {current_channel.text = "0";}
 
         }
 
@@ -42,7 +38,7 @@ Window {
            Layout.topMargin: 20
            ButtonGroup.group: btnGroup
            text: "1"
-           onClicked: {current_channel.text = "Channel: 1";}
+           onClicked: {current_channel.text = "1";}
 
         }
         RoundButton{
@@ -50,7 +46,7 @@ Window {
             Layout.topMargin: 20
            ButtonGroup.group: btnGroup
            text: "2"
-           onClicked: {current_channel.text = "Channel: 2";}
+           onClicked: {current_channel.text = "2";}
 
         }
         RoundButton{
@@ -58,21 +54,21 @@ Window {
            Layout.leftMargin: 30
            ButtonGroup.group: btnGroup
            text: "3"
-           onClicked: {current_channel.text = "Channel: 3";}
+           onClicked: {current_channel.text = "3";}
 
         }
         RoundButton{
            id: four
            ButtonGroup.group: btnGroup
            text: "4"
-           onClicked: {current_channel.text = "Channel: 4";}
+           onClicked: {current_channel.text = "4";}
 
         }
         RoundButton{
            id: five
            ButtonGroup.group: btnGroup
            text: "5"
-           onClicked: {current_channel.text = "Channel: 5";}
+           onClicked: {current_channel.text = "5";}
 
         }
         RoundButton{
@@ -80,21 +76,21 @@ Window {
            Layout.leftMargin: 30
            ButtonGroup.group: btnGroup
            text: "6"
-           onClicked: {status_ch.text = "Channel: 6";}
+           onClicked: {current_channel.text = "6";}
 
         }
         RoundButton{
            id: seven
            ButtonGroup.group: btnGroup
            text: "7"
-           onClicked: {current_channel.text = "Channel: 7";}
+           onClicked: {current_channel.text = "7";}
 
         }
         RoundButton{
            id: eight
            ButtonGroup.group: btnGroup
            text: "8"
-           onClicked: {current_channel.text = "Channel: 8";}
+           onClicked: {current_channel.text = "8";}
 
         }
 
@@ -106,7 +102,6 @@ Window {
             background: Rectangle{
                 width: 40
                 height: 20
-
                 radius: 50
                 color: "red"
              }
@@ -115,10 +110,9 @@ Window {
 
         RoundButton{
            id: nine
-
            ButtonGroup.group: btnGroup
            text: "9"
-           onClicked: {current_channel.text = "Channel: 9";}
+           onClicked: {current_channel.text = "9";}
 
         }
 
@@ -128,47 +122,44 @@ Window {
            background: Rectangle{
                width: 40
                height: 20
-
                radius: 50
                color: "green"
             }
-
-
         }
 
         Button{
             id: channel_inc
             ButtonGroup.group: btnGroup
             Layout.columnSpan: 2
-            //Layout.fillWidth: true
+
             Layout.leftMargin: 30
             text: "Ch+"
             implicitWidth: 50
             implicitHeight: 60
-
-
         }
 
         Button{
            id: volume_inc
+           implicitWidth: 50
+           implicitHeight: 60
+
            ButtonGroup.group: btnGroup
            Layout.columnSpan: 1
-           // Layout.fillWidth: true
-           // Layout.leftMargin: 30
-            text: "Vol+"
-            implicitWidth: 50
-            implicitHeight: 60
+
+           text: "Vol+"
 
         }
 
         Button{
             id: channel_dec
-            ButtonGroup.group: btnGroup
-            Layout.columnSpan: 2
-            //Layout.fillWidth: true
-            Layout.leftMargin: 30
             implicitWidth: 50
             implicitHeight: 60
+            ButtonGroup.group: btnGroup
+            Layout.columnSpan: 2
+
+            anchors.top: channel_inc.bottom
+            Layout.leftMargin: 30
+
 
             text: "Ch-"
 
@@ -177,12 +168,13 @@ Window {
 
         Button{
             id: volume_dec
-            ButtonGroup.group: btnGroup
-            Layout.columnSpan: 1
-          //  Layout.fillWidth: true
-           // Layout.leftMargin: 30
             implicitWidth: 50
             implicitHeight: 60
+            ButtonGroup.group: btnGroup
+            Layout.columnSpan: 1
+
+            anchors.top: volume_inc.bottom
+
 
             text: "Vol-"
 
@@ -199,28 +191,53 @@ Window {
 
             Layout.columnSpan: 3
 
-            Text {
-                id: current_channel
-                text: "Channel: "
-                color: "#ffffff"
-                y: 20
-                anchors.left: status_bar.left
-                Layout.leftMargin: 10
-                font.pointSize: 14
-                font.bold: true
+            GridLayout{
+                id:status_grid
+
+                rowSpacing: 30
+                rows: 2
+                columns: 2
+
+                Text {
+                    id: text_channel
+                    text: "Channel: "
+                    color: "#ffffff"
+                    Layout.topMargin: 20
+                    Layout.leftMargin: 20
+
+                    font.pointSize: 14
+                    font.bold: true
+                }
+
+                Text {
+                    id: current_channel
+                    text: ""
+                    color: "#ffffff"
+                    Layout.topMargin: 20
+                    font.pointSize: 14
+                    font.bold: true
+                }
+
+                Text {
+                    id: text_volume
+                    text: "Volume: "
+                    color: "#ffffff"
+                    Layout.leftMargin: 20
+                    font.pointSize: 14
+                    font.bold: true
+                }
+
+                Text {
+                    id: current_volume
+                    text: ""
+                    color: "#ffffff"
+                    Layout.leftMargin: 20
+                    font.pointSize: 14
+                    font.bold: true
+                }
             }
-            Text {
-                id: current_volume
-                text: "Volume:"
-                color: "#ffffff"
-                y: 70
-               // anchors.horizontalCenter: status_bar.horizontalCenter
-                anchors.left: status_bar.left
-                Layout.leftMargin: 10
-                anchors.verticalCenterOffset: 60
-                font.pointSize: 14
-                font.bold: true
-            }
+
+
         }
     }
 
