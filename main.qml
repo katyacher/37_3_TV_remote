@@ -34,7 +34,7 @@ Window {
 
     GridLayout{
         id: grid
-        rows: 8
+        rows: 7
         columns:3
         columnSpacing: 30
         rowSpacing: 30
@@ -151,14 +151,12 @@ Window {
 
         Button{
             id: channel_inc
-            ButtonGroup.group: btnGroup
-            Layout.columnSpan: 2
-
-            Layout.leftMargin: 30
-            text: "Ch+"
             implicitWidth: 50
             implicitHeight: 60
-
+            text: "Ch+"
+            ButtonGroup.group: btnGroup
+            Layout.columnSpan: 2
+            Layout.leftMargin: 20
             onClicked: inc(current_channel, 1)
         }
 
@@ -166,12 +164,9 @@ Window {
            id: volume_inc
            implicitWidth: 50
            implicitHeight: 60
-
+           text: "Vol+"
            ButtonGroup.group: btnGroup
            Layout.columnSpan: 1
-
-           text: "Vol+"
-
            onClicked: inc(current_volume, 10)
 
         }
@@ -180,12 +175,13 @@ Window {
             id: channel_dec
             implicitWidth: 50
             implicitHeight: 60
+            text: "Ch-"
             ButtonGroup.group: btnGroup
             Layout.columnSpan: 2
+            Layout.topMargin: -30
+            //anchors.top: channel_inc.bottom
+            Layout.leftMargin: 20
 
-            anchors.top: channel_inc.bottom
-            Layout.leftMargin: 30
-            text: "Ch-"
 
             onClicked: dec(current_channel, 1)
         }
@@ -194,11 +190,12 @@ Window {
             id: volume_dec
             implicitWidth: 50
             implicitHeight: 60
+            text: "Vol-"
             ButtonGroup.group: btnGroup
             Layout.columnSpan: 1
+            Layout.topMargin: -30
+            //anchors.top: volume_inc.bottom
 
-            anchors.top: volume_inc.bottom
-            text: "Vol-"
             onClicked: dec(current_volume, 10)
         }
 
@@ -258,7 +255,6 @@ Window {
                     font.bold: true
                 }
             }
-
 
         }
     }
