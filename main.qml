@@ -11,6 +11,27 @@ Window {
     title: qsTr("TV remote")
     color:"#000000"
 
+    function inc(id, param){
+        if(id.text === ""){
+            id.text = "0";
+        } else {
+            let num = Number(id.text);
+            id.text =  String(num + param);
+
+            if(Number(id.text) >= 100){
+                id.text = "100";
+            }
+        }
+    }
+
+    function dec(id, param){
+        id.text =  id.text - param;
+        if(Number(id.text) <= 0){
+            id.text = "0";
+        }
+    }
+
+
     GridLayout{
         id: grid
         rows: 8
@@ -127,6 +148,7 @@ Window {
             }
         }
 
+
         Button{
             id: channel_inc
             ButtonGroup.group: btnGroup
@@ -136,6 +158,8 @@ Window {
             text: "Ch+"
             implicitWidth: 50
             implicitHeight: 60
+
+            onClicked: inc(current_channel, 1)
         }
 
         Button{
@@ -148,6 +172,8 @@ Window {
 
            text: "Vol+"
 
+           onClicked: inc(current_volume, 10)
+
         }
 
         Button{
@@ -159,11 +185,9 @@ Window {
 
             anchors.top: channel_inc.bottom
             Layout.leftMargin: 30
-
-
             text: "Ch-"
 
-
+            onClicked: dec(current_channel, 1)
         }
 
         Button{
@@ -174,12 +198,9 @@ Window {
             Layout.columnSpan: 1
 
             anchors.top: volume_inc.bottom
-
-
             text: "Vol-"
-
+            onClicked: dec(current_volume, 10)
         }
-
 
 
         Rectangle {
@@ -214,6 +235,7 @@ Window {
                     text: ""
                     color: "#ffffff"
                     Layout.topMargin: 20
+                    Layout.leftMargin: 20
                     font.pointSize: 14
                     font.bold: true
                 }
